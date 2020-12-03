@@ -1,0 +1,22 @@
+<ng-container *ngIf="!!(pazienti$ | async) && (pazienti$ | async).length > 0">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <div fxLayout="row wrap" fxLayoutAlign="center" fxFlex.gt-md="80" fxFlex.lt-lg="95">
+      <mat-card *ngFor="let paziente of (pazienti$ | async)" fxFlex.gt-md="30" fxFlex.gt-sm="45" fxFlex="95"
+                class="margin radius">
+        <mat-card-header>
+          <mat-card-title>{{paziente.name}} {{paziente.surname}}</mat-card-title>
+          <mat-card-subtitle>{{paziente.gender === 'male' ? 'Uomo, nato il ' + paziente.birthDate : 'Donna, nata il ' + paziente.birthDate}}</mat-card-subtitle>
+          <mat-card-content>
+            Altezza: {{paziente.heightCm}}, Peso: {{paziente.weightKg}}, Bmp: {{paziente.bmi}}
+          </mat-card-content>
+        </mat-card-header>
+        <mat-card-content class="hover">
+          <div class="font-size on-hover-color" fxLayout="row"
+               fxLayoutAlign="center">
+            {{paziente.name.charAt(0)}} {{paziente.surname.charAt(0)}}
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</ng-container>

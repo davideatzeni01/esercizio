@@ -1,0 +1,19 @@
+<ng-container *ngIf="!!(activity$ | async) && (activity$ | async).length > 0">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <div fxLayout="row wrap" fxLayoutAlign="center" fxFlex.gt-md="80" fxFlex.lt-lg="95">
+      <mat-card *ngFor="let attivita of (activity$ | async)" fxFlex.gt-md="30" fxFlex.gt-sm="45" fxFlex="95"
+                class="margin radius">
+        <mat-card-header>
+          <mat-card-title><strong>Attività: </strong>{{getActivity(attivita.activity)}}</mat-card-title>
+          <mat-card-subtitle><strong>Intensità: </strong>{{getIntensity(attivita.intensity)}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="hover">
+          <div class="font-size on-hover-color" fxLayout="row"
+               fxLayoutAlign="center">
+            <mat-icon class="activity">{{getIcon(attivita.activity)}}</mat-icon>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</ng-container>

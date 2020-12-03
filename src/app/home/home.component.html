@@ -1,0 +1,40 @@
+<div fxLayout="row" fxLayoutAlign="center">
+  <div fxLayout="row wrap" fxLayoutAlign="center" fxFlex.gt-md="80" fxFlex.lt-lg="95">
+    <div class="div-container div-container1" fxFlex.gt-md="30" fxFlex.gt-sm="45" fxFlex="95">
+      <mat-card fxFlex.gt-md="30" fxFlex.gt-sm="45" fxFlex="95" class="home-card">
+        <mat-card-content (click)="navigateTo('pazienti')" style="margin-top: 3em">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-icon class="action-icon icon1" id="icon1">supervised_user_circle</mat-icon>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <span class="action-label label1"><strong class="font-family">Pazienti</strong></span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="div-container div-container2" fxFlex.gt-md="30" fxFlex.gt-sm="45" fxFlex="95">
+      <mat-card fxFlex.gt-md="30" fxFlex.gt-sm="45" fxFlex="95" class="home-card">
+        <mat-card-content (click)="navigateTo('attivita')" style="margin-top: 3em">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-icon class="action-icon icon2" id="icon2">directions_bike</mat-icon>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <span class="action-label label2"><strong class="font-family">Attività</strong></span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="div-container div-container3" fxFlex.gt-md="30" fxFlex.gt-sm="45" fxFlex="95">
+      <mat-card fxFlex.gt-md="30" fxFlex.gt-sm="45" fxFlex="95" class="home-card">
+        <mat-card-content (click)="navigateTo('allenamento')" style="margin-top: 3em">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-icon class="action-icon icon3" id="icon3">fitness_center</mat-icon>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <span class="action-label label3"><strong class="font-family">Allenamento</strong></span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,187 @@
+
+.home-container {
+  margin-top: 10em;
+  opacity: 0;
+  animation-name: appearCards;
+  animation-fill-mode: forwards;
+  animation-duration: 3s;
+}
+
+@keyframes appearCards {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+}
+
+
+.div-container {
+  border-radius: 2px;
+  margin: 20px;
+  background-color: #201c29
+}
+
+.div-container1:hover {
+  background: linear-gradient(to right, #FF5252, #512DA8);
+}
+
+.div-container2:hover {
+  background: linear-gradient(to right, #536DFE, #00796B);
+}
+
+.div-container3:hover {
+  background: linear-gradient(to right, #4CAF50, #FFA000);
+}
+
+.div-container4:hover {
+  background: linear-gradient(to right, #FFA000, #455A64);
+}
+
+.div-container5:hover {
+  background: linear-gradient(to right, #FF5252, #512DA8);
+}
+
+.div-container6:hover {
+  background: linear-gradient(to right, #536DFE, #00796B);
+}
+
+.div-container7:hover {
+  background: linear-gradient(to right, #4CAF50, #FFA000);
+}
+
+.div-container8:hover {
+  background: linear-gradient(to right, #FFA000, #455A64);
+}
+
+.home-card {
+  border-radius: 2px;
+  background-color: #100e17;
+  margin: 10px;
+  height: 25em;
+  padding: 20px 28px 28px;
+  max-width: 100% !important;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.font-family {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.action-icon {
+  color: #201c29;
+  height: 200px;
+  width: 200px;
+  font-size: 200px;
+}
+
+.action-label {
+  color: #201c29;
+  font-size: 30px;
+}
+
+mat-card:hover {
+
+  cursor: pointer;
+
+  .label1 {
+    color: #D32F2F;
+  }
+
+  .label2 {
+    color: #536DFE;
+  }
+
+  .label3 {
+    color: #388E3C;
+  }
+
+  .label4 {
+    color: #FF9800;
+  }
+
+  .label5 {
+    color: #C2185B;
+  }
+
+  .label6 {
+    color: #448AFF;
+  }
+
+  .label7 {
+    color: #689F38;
+  }
+
+  .label8 {
+    color: #FF5722;
+  }
+
+  .icon1 {
+    color: #D32F2F;
+  }
+
+  .icon2 {
+    color: #536DFE;
+  }
+
+  .icon3 {
+    color: #388E3C;
+  }
+
+  .icon4 {
+    color: #FF9800;
+  }
+
+  .icon5 {
+    color: #C2185B;
+  }
+
+  .icon6 {
+    color: #448AFF;
+  }
+
+  .icon7 {
+    color: #689F38;
+  }
+
+  .icon8 {
+    color: #FF5722;
+  }
+
+}
+
+.chip1 {
+  color: #006699;
+}
+
+.chip2 {
+  color: #DE2D2D;
+}
+
+.chip3 {
+  color: chartreuse;
+}
+
+.chip4 {
+  color: orange;
+}
+
+.chip5 {
+  color: rebeccapurple;
+}
+
+.chip6 {
+  color: aqua;
+}
+
+.chip7 {
+  color: #009640;
+}
