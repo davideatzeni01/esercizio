@@ -6,9 +6,6 @@
         <mat-card-header>
           <mat-card-title>{{paziente.name}} {{paziente.surname}}</mat-card-title>
           <mat-card-subtitle>{{paziente.gender === 'male' ? 'Uomo, nato il ' + paziente.birthDate : 'Donna, nata il ' + paziente.birthDate}}</mat-card-subtitle>
-          <mat-card-content>
-            Altezza: {{paziente.heightCm}}, Peso: {{paziente.weightKg}}, Bmp: {{paziente.bmi}}
-          </mat-card-content>
         </mat-card-header>
         <mat-card-content class="hover">
           <div class="font-size on-hover-color" fxLayout="row"
@@ -16,6 +13,9 @@
             {{paziente.name.charAt(0)}} {{paziente.surname.charAt(0)}}
           </div>
         </mat-card-content>
+        <mat-card-footer class="m-footer" fxLayoutAlign="center center">
+          Altezza: {{paziente.heightCm}}, Peso: {{paziente.weightKg}}, Bmp: {{paziente.bmi}}
+        </mat-card-footer>
       </mat-card>
     </div>
   </div>

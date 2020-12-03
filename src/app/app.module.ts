@@ -13,6 +13,7 @@ import {ChartsModule} from 'ng2-charts';
 import { PazientiComponent } from './pazienti/pazienti.component';
 import { AttivitaComponent } from './attivita/attivita.component';
 import { AllenamentoComponent } from './allenamento/allenamento.component';
+import { RicercaOspedaleComponent } from './ricerca-ospedale/ricerca-ospedale.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AllenamentoComponent } from './allenamento/allenamento.component';
     PazientiComponent,
     AttivitaComponent,
     AllenamentoComponent,
+    RicercaOspedaleComponent,
   ],
   imports: [
     ChartsModule,

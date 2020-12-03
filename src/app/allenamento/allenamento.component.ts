@@ -21,7 +21,6 @@ export class AllenamentoComponent implements OnInit, OnDestroy {
 
   subscriptions: Array<Subscription> = [];
   pazienti: Array<PazientiModel>;
-  attivitaPazienti: Array<Array<AllenamentoModel>> = [];
 
   constructor(private pazientiService: PazientiService,
               private allenamentiService: AllenamentiService) {
@@ -34,7 +33,7 @@ export class AllenamentoComponent implements OnInit, OnDestroy {
     const pazienti$ = this.pazientiService.getPazienti().pipe(
       tap((pazienti: Array<PazientiModel>) => this.pazienti = pazienti),
       switchMap((pazienti: PazientiModel[]) => forkJoin(pazienti.map(p => this.allenamentiService.getAllenamenti(p.id)))),
-      tap((result: Array<Array<AllenamentoModel>>) => this.doughnutChartLabels = result.map((res: Array<AllenamentoModel>) => res.map((r: AllenamentoModel) => r.activity))),
+      tap((result: Array<Array<AllenamentoModel>>) => this.doughnutChartLabels = result.map((res: Array<AllenamentoModel>) => res.map((r: AllenamentoModel) => this.getActivity(r.activity)))),
       tap((result: Array<Array<AllenamentoModel>>) => this.doughnutChartData = result.map((res: Array<AllenamentoModel>) => res.map((r: AllenamentoModel) => r.minutes))),
     );
     this.subscriptions.push(pazienti$.subscribe());
@@ -45,13 +44,33 @@ export class AllenamentoComponent implements OnInit, OnDestroy {
   }
 
   getDataPosition(index: number) {
-    console.log(index, '>>>>>>>>>>>>>< index 1');
     return this.doughnutChartData[index];
   }
 
   getLabelPosition(index: number) {
-    console.log(index, '>>>>>>>>>>>>>< index 2');
     return this.doughnutChartLabels[index];
   }
 
+  getActivity(attivita: string) {
+    switch (attivita) {
+      case 'sleeping': {
+        return 'Sonno';
+      }
+      case 'stationary-awake': {
+        return 'Riposo';
+      }
+      case 'walking': {
+        return 'Camminata';
+      }
+      case 'cycling': {
+        return 'Ciclismo';
+      }
+      case 'swimming': {
+        return 'Nuoto';
+      }
+      case 'running': {
+        return 'Corsa';
+      }
+    }
+  }
 }

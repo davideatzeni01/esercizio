@@ -1,0 +1,29 @@
+<div fxLayout="row" *ngFor="let paziente of pazienti; let i = index">
+  <div fxLayout="column" fxFlex="40">
+    <mat-card class="margin radius">
+      <mat-card-header>
+        <mat-card-title>{{paziente.name}} {{paziente.surname}}</mat-card-title>
+        <mat-card-subtitle>{{paziente.gender === 'male' ? 'Uomo, nato il ' + paziente.birthDate : 'Donna, nata il ' + paziente.birthDate}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="hover">
+        <div class="font-size on-hover-color" fxLayout="row"
+             fxLayoutAlign="center">
+          {{paziente.name.charAt(0)}} {{paziente.surname.charAt(0)}}
+        </div>
+      </mat-card-content>
+      <mat-card-footer fxLayoutAlign="center end">
+        Altezza: {{paziente.heightCm}}, Peso: {{paziente.weightKg}}, Bmp: {{paziente.bmi}}
+      </mat-card-footer>
+    </mat-card>
+  </div>
+  <div fxLayout="column" fxFlex="60">
+    <mat-card class="margin radius">
+      <mat-card-content>
+<!--        <canvas baseChart-->
+<!--                [data]="getDataPosition(i)"-->
+<!--                [labels]="getLabelPosition(i)"-->
+<!--                [chartType]="'doughnut'"></canvas>-->
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
