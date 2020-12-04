@@ -60,7 +60,7 @@ export class RicercaOspedaleComponent implements OnInit, OnDestroy {
         allenamento.forEach(all => {
           const randomColors: any = this.randomColorUtil.getRandomPaletteColor();
           datasetsBySoggetto.push({
-            label: [],
+            label: ['Valore in Minuti'],
             data: all.minutes,
             fill: false,
             backgroundColor: randomColors.backgroundColor,
