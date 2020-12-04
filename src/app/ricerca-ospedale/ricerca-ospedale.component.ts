@@ -1,13 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {forkJoin, Subscription} from 'rxjs';
 import {AllenamentiService} from '../services/allenamenti.service';
-import {map, switchMap, tap} from 'rxjs/operators';
+import {filter, map, switchMap, tap} from 'rxjs/operators';
 import {PazientiModel} from '../interfaces/pazienti.model';
 import {AllenamentoModel} from '../interfaces/allenamento.model';
 import {PazientiService} from '../services/pazienti.service';
 import {AttivitaService} from '../services/attivita.service';
 import * as _ from 'lodash';
 import {AttivitaModel} from '../interfaces/attivita.model';
+import {RandomColorChartService} from '../common/utils/random-color-chart.service';
 
 @Component({
   selector: 'app-ricerca-ospedale',
@@ -17,10 +18,21 @@ import {AttivitaModel} from '../interfaces/attivita.model';
 export class RicercaOspedaleComponent implements OnInit, OnDestroy {
   subscriptions: Array<Subscription> = [];
   pazienti: Array<PazientiModel>;
+  bar_options = {
+    title: {
+      display: true,
+      text: 'Intensità allenamento',
+    },
+    scaleShowVerticalLines: false,
+    responsive: true,
+  };
+  labels: Array<string> = ['None', 'Bassa', 'Moderata', 'Vigorosa'];
+  datasets: Array<Array<any>> = [];
 
   constructor(private allenamentiService: AllenamentiService,
               private pazientiService: PazientiService,
-              private attivitaService: AttivitaService) {
+              private attivitaService: AttivitaService,
+              private randomColorUtil: RandomColorChartService) {
   }
 
   ngOnInit() {
@@ -36,10 +48,49 @@ export class RicercaOspedaleComponent implements OnInit, OnDestroy {
           intensita: this.getIntensity(attivita.find(el => el.activity === a.activity).intensity),
         }))),
       )),
-      tap(v => console.log(v))
     );
     this.subscriptions.push(initData$.subscribe());
 
+    const initChart$ = initData$.pipe(
+      filter(Boolean),
+      map((allenamentiMapped: Array<AllenamentoModel & { intensita: string }>) => _.groupBy(allenamentiMapped, 'id')),
+      map((allenamentiGrouped: any) => this.reduceByIntensity(allenamentiGrouped)),
+      tap((allenamentiReduced: any[]) => allenamentiReduced.forEach((allenamento: any[]) => {
+        const datasetsBySoggetto = [];
+        allenamento.forEach(all => {
+          const randomColors: any = this.randomColorUtil.getRandomPaletteColor();
+          datasetsBySoggetto.push({
+            label: [],
+            data: all.minutes,
+            fill: false,
+            backgroundColor: randomColors.backgroundColor,
+            borderColor: randomColors.borderColor,
+            pointBorderColor: randomColors.pointBorderColor,
+            pointBackgroundColor: randomColors.pointBackgroundColor,
+          });
+        });
+        this.datasets.push(datasetsBySoggetto);
+      })),
+      tap(() => console.log(this.datasets))
+    );
+
+    this.subscriptions.push(initChart$.subscribe());
+  }
+
+  reduceByIntensity(allenamentiGrouped: any) {
+    const keys = Object.keys(allenamentiGrouped);
+    const objToArray = keys.map(k => allenamentiGrouped[k]);
+    const objToArrayMapped = objToArray.map(a => a.map(el => ({
+      minutes: el.minutes,
+      intensita: el.intensita,
+    })));
+    const groupElementByIntensity = objToArrayMapped.map((allenamentiBySoggetto: Array<AllenamentoModel & { intensita: string }>) => _.groupBy(allenamentiBySoggetto, 'intensita'));
+    const reducedAllenamentiByIntensity = groupElementByIntensity.map(el => {
+      const key = Object.keys(el);
+      return key.map(k => el[k].reduce((a, b) => ({minutes: a.minutes + b.minutes, intensita: a.intensita})));
+    });
+    console.log(reducedAllenamentiByIntensity);
+    return reducedAllenamentiByIntensity;
   }
 
   ngOnDestroy(): void {

@@ -19,10 +19,13 @@
   <div fxLayout="column" fxFlex="60">
     <mat-card class="margin radius">
       <mat-card-content>
-<!--        <canvas baseChart-->
-<!--                [data]="getDataPosition(i)"-->
-<!--                [labels]="getLabelPosition(i)"-->
-<!--                [chartType]="'doughnut'"></canvas>-->
+        <canvas baseChart
+                [labels]="labels"
+                [datasets]="datasets[i]"
+                [options]="bar_options"
+                [legend]="true"
+                [chartType]="'bar'">
+        </canvas>
       </mat-card-content>
     </mat-card>
   </div>
