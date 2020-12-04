@@ -26,7 +26,7 @@ export class RicercaOspedaleComponent implements OnInit, OnDestroy {
     scaleShowVerticalLines: false,
     responsive: true,
   };
-  labels: Array<string> = ['None', 'Bassa', 'Moderata', 'Vigorosa'];
+  labels: Array<string> = ['Bassa', 'Moderata', 'None', 'Vigorosa'];
   datasets: Array<Array<any>> = [];
 
   constructor(private allenamentiService: AllenamentiService,
@@ -71,7 +71,6 @@ export class RicercaOspedaleComponent implements OnInit, OnDestroy {
         });
         this.datasets.push(datasetsBySoggetto);
       })),
-      tap(() => console.log(this.datasets))
     );
 
     this.subscriptions.push(initChart$.subscribe());
@@ -87,9 +86,8 @@ export class RicercaOspedaleComponent implements OnInit, OnDestroy {
     const groupElementByIntensity = objToArrayMapped.map((allenamentiBySoggetto: Array<AllenamentoModel & { intensita: string }>) => _.groupBy(allenamentiBySoggetto, 'intensita'));
     const reducedAllenamentiByIntensity = groupElementByIntensity.map(el => {
       const key = Object.keys(el);
-      return key.map(k => el[k].reduce((a, b) => ({minutes: a.minutes + b.minutes, intensita: a.intensita})));
+      return _.sortBy(key.map(k => el[k].reduce((a, b) => ({minutes: a.minutes + b.minutes, intensita: a.intensita}))), 'intensita');
     });
-    console.log(reducedAllenamentiByIntensity);
     return reducedAllenamentiByIntensity;
   }
 
